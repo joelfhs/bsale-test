@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+
+Route::apiResource('v1/categorias', CategoryController::class)->only(['index', 'show']);
+
+Route::apiResource('v1/productos', ProductController::class)->only(['index', 'show']);
