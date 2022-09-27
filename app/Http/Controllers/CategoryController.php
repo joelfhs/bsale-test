@@ -47,7 +47,7 @@ class CategoryController extends Controller
     public function show($id)//Category $category
     {
         $categories = Category::all();
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);//find
 		//if(isset($category)){
 			return view('categories.show')->with('categories',$categories)->with('category',$category);
 		//}else{

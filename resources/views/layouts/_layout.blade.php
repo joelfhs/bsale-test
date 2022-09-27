@@ -21,7 +21,7 @@
       <div class="container-fluid">
         <a class="navbar-brand">{{ config('app.name') }}</a>
 
-        <a class="text-white" href="" role="button">Productos</a>
+        <a class="text-white" href="{{ route('products.index') }}" role="button">Productos</a>
 
         <a class="text-white" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Categorias</a>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -43,10 +43,12 @@
 
 
 
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
+        <div>
+          <div class="input-group">
+            <input id="input-search" type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="button-search">
+            <button class="btn btn-outline-info" type="button" id="button-search"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
 
         <button type="button" class="btn btn-info rounded-circle position-relative me-3">
           <i class="bi bi-cart"></i>
@@ -63,6 +65,16 @@
     </div>
       
     <!-- Scripts -->
+    <script type="text/javascript">
+      const buttonSearch = document.getElementById('button-search');
+      buttonSearch.onclick = function() {
+        const inputSearch = document.getElementById('input-search');
+        
+        var url = "{{ route('products.search', ':src') }}";
+	      url = url.replace(':src', inputSearch.value);
+	      location.href = url;
+      }
+    </script>
     <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
     @yield('js')
     @vite(['resources/js/app.js'])

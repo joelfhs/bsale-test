@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('index');//welcome
 });
 
-Route::get('/productos/','App\Http\Controllers\ProductController@index');
+Route::get('/productos/','App\Http\Controllers\ProductController@index')->name('products.index');
+//products.show
+Route::get('/productos/buscar/{search}','App\Http\Controllers\ProductController@search')->name('products.search');
 
+//categories.index
 Route::get('/categorias/{id}', 'App\Http\Controllers\CategoryController@show')->name('categories.show');

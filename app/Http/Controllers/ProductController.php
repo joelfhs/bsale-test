@@ -19,6 +19,13 @@ class ProductController extends Controller
         return view('products/index')->with('categories',$categories);
     }
 
+    public function search($search)
+    {
+        $categories = Category::all();
+        //$products = Product::findOrFail($product);//find
+        return view('products/search')->with('categories',$categories)->with('search',$search);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
