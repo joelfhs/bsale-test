@@ -2,6 +2,9 @@
 
 @section('css')
   <style type="text/css">
+    ul#ul-categories > li > a.nav-link {
+      color: black;
+    }
   </style>
 @endsection
 
@@ -38,11 +41,8 @@
     const divProducts = document.getElementById('div-products');
     console.log(divProducts);
 
-    //const ulCategories = document.getElementById('ul-categories');
-    //console.log(ulCategories);
-
     function getProducts(){
-      const res = fetch("{{ route('api.index') }}");
+      const res = fetch("{{ route('api.v1.products.index') }}");
       return res;
     }
 
@@ -54,16 +54,33 @@
         div.classList.add('col');
         div.innerHTML = templateProduct(product);
         divProducts.appendChild(div);
-        
-
-        //categorias
-        /*const li = document.createElement('li');
-        li.classList.add('nav-item');
-        li.innerHTML = templateCategory(product);
-        ulCategories.appendChild(li);*/
       });
     });
 
+
+
+    function templateCategory(category){
+      return `<a class="nav-link" aria-current="page" href="#${category.id}">${category.name}</a>`;
+    }
+
+    const ulCategories = document.getElementById('ul-categories');
+    console.log(ulCategories);
+
+    function getCategories(){
+      const res = fetch("{{ route('api.v1.categories.index') }}");
+      return res;
+    }
+
+    getCategories().then(categories => categories.json()).then(categoryFormat => {
+      categoryFormat.data.map(category => {
+        //console.log(category);
+
+        const li = document.createElement('li');
+        li.classList.add('nav-item');
+        li.innerHTML = templateCategory(category);
+        ulCategories.appendChild(li);
+      });
+    });
 
 
   </script>
