@@ -9,6 +9,12 @@
 @section('content')
 	<h1>{{ ucfirst($category->name) }}:</h1>
 
+  <div id="louder" class="text-center p-5">
+    <div class="spinner-border text-primary" style="width: 6rem; height: 6rem;" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
   <div class="container text-center">
     <div id="div-products" class="row row-cols-2 g-2 row-cols-lg-4 g-lg-2 align-items-center">
 
@@ -16,9 +22,13 @@
   </div>
 @endsection
 
+
 @section('js')
   <script type="text/javascript">
-    function templateProduct(product){
+    var urlFetch = "{{ route('api.v1.products.by-category', $category->id) }}";
+  </script>
+<!--  <script type="text/javascript">
+/*    function templateProduct(product){
       return `<div class="card">
                 <img src="${product.image}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -32,6 +42,8 @@
                 </div>
               </div>`;
     }
+
+alert(urlFetch);
 
     const divProducts = document.getElementById('div-products');
     console.log(divProducts);
@@ -50,7 +62,8 @@
         div.innerHTML = templateProduct(product);
         divProducts.appendChild(div);
       });
-    });
+    });*/
 
-  </script>
+  </script>-->
+  @vite(['resources/js/products.js'])
 @endsection
