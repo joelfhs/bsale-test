@@ -44,9 +44,15 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)//Category $category
     {
-        //
+        $categories = Category::all();
+        $category = Category::find($id);
+		//if(isset($category)){
+			return view('categories.show')->with('categories',$categories)->with('category',$category);
+		//}else{
+		//	abort(404);
+		//}
     }
 
     /**

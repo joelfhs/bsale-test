@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/productos/','App\Http\Controllers\ProductController@index');
+
+Route::get('/categorias/{id}', 'App\Http\Controllers\CategoryController@show')->name('categories.show');

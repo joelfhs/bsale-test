@@ -2,13 +2,12 @@
 
 @section('css')
   <style type="text/css">
-
   </style>
 @endsection
 
 
 @section('content')
-	<h1>Productos:</h1>
+	<h1>{{ ucfirst($category->name) }}:</h1>
 
   <div class="container text-center">
     <div id="div-products" class="row row-cols-2 g-2 row-cols-lg-4 g-lg-2 align-items-center">
@@ -38,7 +37,7 @@
     console.log(divProducts);
 
     function getProducts(){
-      const res = fetch("{{ route('api.v1.products.index') }}");
+      const res = fetch("{{ route('api.v1.products.by-category', $category->id) }}");
       return res;
     }
 
@@ -52,32 +51,6 @@
         divProducts.appendChild(div);
       });
     });
-
-
-
-    /*function templateCategory(category){
-      return `<a class="nav-link" aria-current="page" href="#${category.id}">${category.name}</a>`;
-    }
-
-    const ulCategories = document.getElementById('ul-categories');
-    console.log(ulCategories);
-
-    function getCategories(){
-      const res = fetch("{{ route('api.v1.categories.index') }}");
-      return res;
-    }
-
-    getCategories().then(categories => categories.json()).then(categoryFormat => {
-      categoryFormat.data.map(category => {
-        //console.log(category);
-
-        const li = document.createElement('li');
-        li.classList.add('nav-item');
-        li.innerHTML = templateCategory(category);
-        ulCategories.appendChild(li);
-      });
-    });*/
-
 
   </script>
 @endsection

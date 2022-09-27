@@ -44,6 +44,29 @@ class ProductController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function byCategory($category)
+    {
+        $products = Product::category($category)->get();
+        return ProductResource::collection($products);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search($product)
+    {
+        $products = Product::name($product)->get();
+        return ProductResource::collection($products);
+    }
+
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

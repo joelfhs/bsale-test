@@ -6,6 +6,11 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       
       <!-- Styles -->
+      <style type="text/css">
+        ul#ul-categories > li > a.nav-link {
+          color: black;
+        }
+      </style>
       <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
       @yield('css')
       
@@ -26,7 +31,11 @@
           </div>
           <div class="offcanvas-body">
             <ul id="ul-categories" class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          
+              @foreach($categories as $category)
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+                </li>
+              @endforeach
             </ul>
           </div>
         </div>
