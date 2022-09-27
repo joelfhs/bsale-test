@@ -24,4 +24,7 @@ use App\Http\Controllers\Api\V1\ProductController;
 
 Route::apiResource('v1/categorias', CategoryController::class)->only(['index', 'show']);
 
-Route::apiResource('v1/productos', ProductController::class)->only(['index', 'show']);
+//Route::apiResource('v1/productos', ProductController::class)->only(['index', 'show']);
+
+Route::get('v1/productos', [ProductController::class,'index'])->name('api.index');
+Route::get('v1/productos/{id}', [ProductController::class,'show'])->name('api.show');
