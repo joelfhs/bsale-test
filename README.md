@@ -1,66 +1,115 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto Carrito de Compras
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+El siguiente proyecto se basa en una aplicación tipo carrito de compra con el cual se simula una tienda online, misma que se nutre de data proporcionada por el cliente a través de su base de datos. Es así, que con el objetivo de cumplir con los requerimientos proporcionados se han utilizado diferentes tecnologías para construir el front y back del sistema
 
-## About Laravel
+### Para el Front-end
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Boostrap 5.x:** se ha utilizado dicho framework con el objetivo de lograr tanto un diseño responsive como una experiencia de usuario agradable.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Sweet alert 2:** al ser una librería pensada para utilizarse junto a JavaScript Vanilla resulta perfecta para el ejercicio realizado. Con sweet alert 2 el objetivo consistía en mostrar alertas y diálogos de confirmación con un diseño bonito.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Fetch:** Se está utilizando el método Fetch de JavaScript Vanilla para consumir un API.
 
-## Learning Laravel
+### Para el Back-end
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Laravel 9.x:** se ha utilizado dicho framework con el objetivo de realizar todo el back de la aplicación.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Cookies:** se ha utilizado con el objetivo de almacenar en el navegador del usuario información relacionada a los productos agregados al carrito de compras y de ésta manera se logra consultar la actividad previa del navegador para recuperar los datos de los productos elegidos por el usuario.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ¿Cómo llegan los datos?
 
-## Laravel Sponsors
+Para poder obtener los datos necesariamente se requiere de data ya que dentro de ella llegan las colecciones de los objetos
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## Rutas del API V1:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### GET Lista Categorías
+```
+GET /v1/categories retornara las categorías
+```
+### GET Recurso Categoría
+```
+GET /v1/categories/:id retornara una categoría específica
+```
 
-## Contributing
+### GET Lista Productos
+```
+GET /v1/products retornara los productos
+```
+### GET Recurso Producto
+```
+GET /v1/products/:id retornara un producto especifico
+```
+### GET Lista Productos por Busqueda Nombres
+```
+GET /v1/products/search/:palabra retornara los productos que conicidan con la(s) palabra(s)
+```
+### GET Lista Productos por Categoría
+```
+GET /v1/products/by-category/:id retornara los productos por categoría especifica
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Estructura JSON del Resource para productos
 
-## Code of Conduct
+Al realizar una petición HTTP, el servicio retornará un JSON con la siguiente estructura:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+{
+"data": [
+  {
+    "id": 5,
+    "name": "ENERGETICA MR BIG",
+    "image": "https://dojiw2m9tvv09.cloudfront.net/11132/product/misterbig3308256.jpg",
+    "price": 1490,
+    "discount": 20,
+    "category": {
+      "id": 1,
+      "name": "bebida energetica"
+    }
+  }
+]
+}
+```
 
-## Security Vulnerabilities
+- **id:** identificador único del producto (Integer)
+- **name:** nombre del producto y de la categoría a la que pertenece el producto (String)
+- **image:** imagen del producto(String)
+- **price:** precio del producto (Float)
+- **discount:** descuento que se le ha aplicado al precio actual del producto(Integer)
+- **category:** información relacionada a la categoría a la que pertenece el producto
+- **category.id:** identificador único de la categoría a la que pertenece el producto (Integer)
+- **category.name:** nombre de la categoría a la que pertenece el producto (String)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Estructura JSON del Resource para Categorías
 
-## License
+Al realizar una petición HTTP, el servicio retornará un JSON con la siguiente estructura:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+{
+"data": [
+  {
+    "id": 1,
+    "name": "bebida energetica"
+  }
+]
+}
+```
+
+- **id:** identificador único de la categoría a la que pertenece el producto (Integer)
+- **name:** nombre de la categoría a la que pertenece el producto (String)
+
+
+## Rutas de la Pagina:
+
+### GET Lista Productos
+```
+GET /productos
+```
+### GET Lista Productos por Busqueda Nombres
+```
+GET /productos/buscar/:palabra
+```
+### GET Lista Productos por Categoría
+```
+GET /categorias/:id
+```
