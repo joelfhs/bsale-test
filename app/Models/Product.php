@@ -25,7 +25,8 @@ class Product extends Model
             return $query->where('name','LIKE',"%$name%");
         }
     }
-
+    
+    //Query Scope
     public function scopeCategory($query, $category){
         if($category){
             return $query->where('category', $category);

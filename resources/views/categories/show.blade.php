@@ -27,42 +27,4 @@
   <script type="text/javascript">
     var urlFetch = "{{ route('api.v1.products.by-category', $category->id) }}";
   </script>
-<!--  <script type="text/javascript">
-/*    function templateProduct(product){
-      return `<div class="card">
-                <img src="${product.image}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title text-truncate">${product.name}</h5>
-                  <div class="d-inline">
-                    <span class="float-start text-primary align-middle">$${product.id}</span>
-                    <button type="button" class="btn btn-primary rounded-circle float-end align-middle">
-                      <i class="bi bi-cart-plus"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>`;
-    }
-
-alert(urlFetch);
-
-    const divProducts = document.getElementById('div-products');
-    console.log(divProducts);
-
-    function getProducts(){
-      const res = fetch("{{ route('api.v1.products.by-category', $category->id) }}");
-      return res;
-    }
-
-    getProducts().then(products => products.json()).then(productFormat => {
-      productFormat.data.map(product => {
-        //console.log(product);
-
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = templateProduct(product);
-        divProducts.appendChild(div);
-      });
-    });*/
-
-  </script>-->
 @endsection

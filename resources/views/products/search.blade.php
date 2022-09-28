@@ -22,6 +22,7 @@
   </div>
 @endsection
 
+
 @section('js')
   <script type="text/javascript">
     var urlFetch = "{{ route('api.v1.products.search', $search) }}";

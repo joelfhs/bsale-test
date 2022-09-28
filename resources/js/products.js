@@ -1,3 +1,4 @@
+//Template de los Productos
 function templateProduct(product){
       const ruta = urlShowCategory.replace(':idCategory', product.category.id);
       const imgNoDisponible = "https://www.timandorra.com/wp-content/uploads/2016/11/Imagen-no-disponible.png";
@@ -50,7 +51,7 @@ function templateProduct(product){
       }
     });
 
-
+    //Buscador
     buttonSearch.onclick = function() {
       const inputSearch = document.getElementById('input-search');
       if(inputSearch.value && inputSearch.value != ''){
@@ -64,6 +65,7 @@ function templateProduct(product){
       }
     }
 
+    //Obtener Productos del Api
     async function getProducts(){
       badgeCart();
       const res = await fetch(urlFetch);
@@ -87,7 +89,7 @@ function templateProduct(product){
     });
 
 
-
+//Eventos para botones de compra
 function buttonEvents(){
   var buttons = document.querySelectorAll('button.button-add-cart');
   for (var i = 0; i < buttons.length; i++) {
@@ -146,7 +148,7 @@ function buttonEvents(){
 }
 
 
-
+//Contador badge del Carrito
 function badgeCart(){
   const spanBadgeCart = document.getElementById('badge-cart');
   var cart = Cookies.get('cart');
