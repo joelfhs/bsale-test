@@ -65,5 +65,4 @@ alert(urlFetch);
     });*/
 
   </script>-->
-  @vite(['resources/js/products.js'])
 @endsection

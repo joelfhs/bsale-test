@@ -7,7 +7,7 @@
 
 
 @section('content')
-	<h1>Productos con {{ ucfirst($search) }}:</h1>
+	<h1>Productos con "{{ ucfirst($search) }}":</h1>
 
   <div id="louder" class="text-center p-5">
     <div class="spinner-border text-primary" style="width: 6rem; height: 6rem;" role="status">

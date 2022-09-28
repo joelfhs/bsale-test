@@ -7,7 +7,7 @@
       
       <!-- Styles -->
       <style type="text/css">
-        div.card > button.button-comprar {
+        div.card > button.button-add-cart {
           border-top-left-radius: initial;
           border-top-right-radius: initial;
         }
@@ -48,8 +48,11 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-info rounded-circle position-relative me-3 my-2">
+        <button type="button" class="btn btn-info btn-lg rounded-circle position-relative me-4 my-2">
           <i class="bi bi-cart"></i>
+          <span id="badge-cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <span class="visually-hidden">unread messages</span>
+          </span>
         </button>
 
       </div>
@@ -84,15 +87,11 @@
     <!-- Scripts -->
     <script type="text/javascript">
       var urlShowCategory = "{{ route('categories.show', ':idCategory') }}";
-      
-      function hola(){
-        console.log('hola');
-      }
-
+      var urlSearchProduct = "{{ route('products.search', ':searchProduct') }}";
     </script>
     <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
     @yield('js')
-    @vite(['resources/js/app.js'])
-      
+    @vite(['resources/js/app.js','resources/js/products.js'])
+    
   </body>
 </html>
