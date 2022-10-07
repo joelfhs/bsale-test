@@ -15,7 +15,7 @@ function templateProduct(product){
 
           if(product.discount && product.discount>0){
             tpl = tpl + `<div>
-                          <small class="fw-light text-decoration-line-through mb-0">$${product.price/(1-product.discount/100)}</small>
+                          <small class="fw-light text-decoration-line-through mb-0">$${(product.price/(1-product.discount/100)).toFixed(2)}</small>
                         </div>`;
           }
 
@@ -36,6 +36,7 @@ function templateProduct(product){
       return tpl;
     }
 
+    const inputSearch = document.getElementById('input-search');
     const buttonSearch = document.getElementById('button-search');
     const divLouder = document.getElementById('louder');
     const divProducts = document.getElementById('div-products');
@@ -43,7 +44,7 @@ function templateProduct(product){
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 5000,
+      timer: 6000,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -51,20 +52,35 @@ function templateProduct(product){
       }
     });
 
+
     //Buscador
-    buttonSearch.onclick = function() {
-      const inputSearch = document.getElementById('input-search');
-      if(inputSearch.value && inputSearch.value != ''){
+    function buscar() {
+      if (inputSearch.value && inputSearch.value != '') {
         const url = urlSearchProduct.replace(':searchProduct', inputSearch.value);
         location.href = url;
-      }else{
+      } else {
         Toast.fire({
           icon: 'warning',
           title: 'Debes Ingresar un texto para buscar...'
         });
+        inputSearch.focus();
       }
     }
 
+    //Click en Buscar
+    buttonSearch.onclick = function() {
+      buscar();
+    }
+
+    //Enter del Buscador
+    document.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        buscar();
+        //console.log('focus', document.activeElement === inputSearch);
+      }
+    });
+
+    
     //Obtener Productos del Api
     async function getProducts(){
       badgeCart();
@@ -73,12 +89,19 @@ function templateProduct(product){
     }
 
     getProducts().then(products => products.json()).then(productFormat => {
-      productFormat.data.map(product => {
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = templateProduct(product);
-        divProducts.appendChild(div);
-      });      
+      if (productFormat.data.length > 0){
+        productFormat.data.map(product => {
+          const div = document.createElement('div');
+          div.classList.add('col');
+          div.innerHTML = templateProduct(product);
+          divProducts.appendChild(div);
+        });      
+      }else{
+        const h2 = document.createElement('h2');
+        h2.classList.add('p-4');
+        h2.innerText = "No hay productos disponibles...";
+        divProducts.parentNode.appendChild(h2);
+      }
       if(divLouder){
         divLouder.style.display = 'none';
       }
@@ -96,7 +119,7 @@ function buttonEvents(){
   buttons[i].addEventListener('click', function (event) {
     var sender = event.currentTarget ||  event.target;
 
-    const compra = [
+    const newCompra = [
       sender.getAttribute('data-id'),
       sender.parentElement.querySelector('.card-body h5.card-title').innerText,
       sender.parentElement.querySelector('img').src,
@@ -104,7 +127,7 @@ function buttonEvents(){
       sender.parentElement.querySelector('.card-body small') ? sender.parentElement.querySelector('.card-body small.discount').innerText.slice(2).replace('%','') : '0',
       1
     ];
-    /*const compra = [
+    /*const newCompra = [
       "id",
       "name",
       "image",
@@ -117,30 +140,37 @@ function buttonEvents(){
     if(cart && cart!=null){
       //console.log('existe la cookie', cart);
       var compras = cart.split(';');
-      compras.push(compra.join(','));
-      Cookies.remove('cart');
-      Cookies.set('cart', compras.join(';'), { expires: 7 });
-      
-      /*compras.map(compra => {
-        var compraSet = compra.split(',');
-        //console.log(compraSet[0], compra[0]);
-        if(compraSet[0] == compra[0]){
-          console.log('entra');
-          compras[0] = compra;
-          console.log(compras);
-          Cookies.remove('cart');
-          Cookies.set('cart', compras.join(';'), { expires: 7 });
-        }else{
-          compras.push(compra.join(','));
-          Cookies.remove('cart');
-          Cookies.set('cart', compras.join(';'), { expires: 7 });
+      var newCompras = compras.map(compra => {
+        var compraDiv = compra.split(',');
+        if(compraDiv[0] == newCompra[0]){
+          compraDiv[5] = Number(compraDiv[5])+1;
+          compra = compraDiv.join(',');
+          Toast.fire({
+            icon: 'success',
+            title: 'Producto sumado al Carrito...'
+          });
         }
-      });*/
+        return compra;
+      });
+      if (compras.join(';') === newCompras.join(';')) {
+        newCompras.push(newCompra.join(','));
+        Toast.fire({
+          icon: 'success',
+          title: 'Producto agregado al Carrito...'
+        });
+      }
+      Cookies.remove('cart');
+      Cookies.set('cart', newCompras.join(';'), { expires: 7 });
+      console.log(Cookies.get('cart'));
     }else{
       //console.log('no existe la cookie');
-      Cookies.set('cart', compra.join(','), { expires: 7 });
+      Cookies.set('cart', newCompra.join(','), { expires: 7 });
+      Toast.fire({
+        icon: 'success',
+        title: 'Producto agregado al Carrito...'
+      });
     }
-
+    
     badgeCart();
 
   });
