@@ -2,6 +2,13 @@
 
 El siguiente proyecto se basa en una aplicación tipo carrito de compra con el cual se simula una tienda online, misma que se nutre de data proporcionada por el cliente a través de su base de datos. Es así, que con el objetivo de cumplir con los requerimientos proporcionados se han utilizado diferentes tecnologías para construir el front y back del sistema
 
+## Front-end
+- Realizado en Javascript, Archivos de carga en resources\js
+
+## Back-end
+- Realizado en PHP-Laravel, Controladores en app\Controllers
+- API, Controladores en app\Controllers\Api\V1
+
 ### Para el Front-end
 
 - **Boostrap 5.x:** se ha utilizado dicho framework con el objetivo de lograr tanto un diseño responsive como una experiencia de usuario agradable.
@@ -104,6 +111,10 @@ Al realizar una petición HTTP, el servicio retornará un JSON con la siguiente 
 ### GET Lista Productos
 ```
 GET /productos
+```
+### GET Lista Productos Agregadas al Carrito
+```
+GET /productos/carrito
 ```
 ### GET Lista Productos por Busqueda Nombres
 ```
