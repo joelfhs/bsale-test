@@ -27,4 +27,5 @@
   <script type="text/javascript">
     var urlFetch = "{{ route('api.v1.products.by-category', $category->id) }}";
   </script>
+  @vite(['resources/js/products.js'])
 @endsection

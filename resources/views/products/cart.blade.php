@@ -33,15 +33,6 @@
       </thead>
       <tbody id="cart-table" class="table-group-divider">
 
-        <!--<tr>
-          <th>Producto</th>
-          <th>Imagen</th>
-          <th>Precio Unitario</th>
-          <th>Cantidad</th>
-          <th>Precio</th>
-          <th>Acciones</th>
-        </tr>-->
-
       </tbody>
     </table>
 

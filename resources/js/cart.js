@@ -1,7 +1,7 @@
 import { templateCart, templateCartTotal } from './templates.js';
-import { removeCartButtonEvents, Toast } from './cookies.js';
+import { Toast, badgeCart, removeCartButtonEvents } from './cookies.js';
 import Cookies from 'js-cookie';
-//import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 const cartTable = document.getElementById('cart-table');
 
@@ -29,13 +29,14 @@ if (cart && cart != null) {
   cartTable.appendChild(tr);
 }
 
+badgeCart();
 removeCartButtonEvents();
 
 
 //Buton Comprar
 const buttonBuy = document.getElementById('button-buy');
 if(buttonBuy){
-  buttonBuy.addEventListener('click', (event) => {
+  buttonBuy.addEventListener('click', () => {
     Swal.fire({
       title: 'Has Realizado la Compra',
       text: 'Gracias por revisar este Test equipo de Bsale!',
@@ -47,7 +48,7 @@ if(buttonBuy){
 //Boton Eliminar Todo
 const buttonDelete = document.getElementById('button-delete');
 if(buttonDelete){
-  buttonDelete.addEventListener('click', (event) => {
+  buttonDelete.addEventListener('click', () => {
     Swal.fire({
       title: '¿Estas Seguro de Eliminar todos los Producto?',
       //text: '',

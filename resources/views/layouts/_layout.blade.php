@@ -92,7 +92,7 @@
     </script>
     <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
     @yield('js')
-    @vite(['resources/js/app.js','resources/js/products.js'])
+    @vite(['resources/js/app.js','resources/js/search.js'])
     
   </body>
 </html>
