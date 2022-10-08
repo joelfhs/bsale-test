@@ -36,4 +36,10 @@ class ProductController extends Controller
         //$products = Product::findOrFail($product);//find
         return view('products/search')->with('categories',$categories)->with('search',$search);
     }
+
+    public function cart()
+    {
+        $categories = Category::all();
+        return view('products/cart')->with('categories',$categories);
+    }
 }

@@ -20,6 +20,8 @@ Route::get('/','App\Http\Controllers\ProductController@index');
 Route::get('/productos/','App\Http\Controllers\ProductController@index')->name('products.index');
 //products.show
 Route::get('/productos/buscar/{search}','App\Http\Controllers\ProductController@search')->name('products.search');
+Route::get('/productos/carrito','App\Http\Controllers\ProductController@cart')->name('products.cart');
+
 
 //categories.index
 Route::get('/categorias/{id}', 'App\Http\Controllers\CategoryController@show')->name('categories.show');

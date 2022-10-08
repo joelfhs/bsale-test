@@ -48,13 +48,13 @@
             </div>
           </div>
         </div>
-
-        <button type="button" class="btn btn-info btn-lg rounded-circle position-relative me-4 my-2">
+<!--type="button"-->
+        <a role="button" href="{{ route('products.cart') }}" class="btn btn-info btn-lg rounded-circle position-relative me-4 my-2">
           <i class="bi bi-cart"></i>
           <span id="badge-cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             <span class="visually-hidden">unread messages</span>
           </span>
-        </button>
+        </a>
 
       </div>
     </nav>
